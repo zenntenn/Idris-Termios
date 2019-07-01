@@ -21,6 +21,6 @@ modeSelect TUI = FancyConsole IO
 ||| Implementation of FancyConsole for the standard POSIX IO terminal
 public export FancyConsole IO where
   TuiStatus mode = State (modeSelect mode)
-  initialize = ?hole $ (foreign FFI_C "initialize" (IO ()))
+  initialize = ?init $ (foreign FFI_C "initialize" (IO ()))
   cleanup = ?FancyConsole_rhs_3
   getCh = lift $ foreign FFI_C "wgetch" (IO Char)

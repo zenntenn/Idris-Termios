@@ -1,0 +1,25 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": 
+	{
+		"C_Cpp.default.includePath": 
+		[
+			"C:\\msys64\\usr\\include\\",
+			"C:\\msys64\\usr\\bin"		
+		],
+		"C_Cpp.default.browse.path": 
+		[
+			"C:\\msys64\\usr\\include\\sys",
+			"C:\\msys64\\usr\\bin"
+		],
+		"C_Cpp.default.cppStandard": "c++98",
+		"C_Cpp.default.cStandard": "c11",
+		"C_Cpp.default.compilerPath": "C:\\msys64\\mingw64\\bin\\gcc.exe",
+		"C_Cpp.default.intelliSenseMode": "gcc-x64",
+		"C_Cpp.default.browse.limitSymbolsToIncludedHeaders": true
+	}
+}

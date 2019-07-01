@@ -1,0 +1,10 @@
+package termios
+
+modules = Termios
+
+sourcedir = src
+
+makefile = Makefile
+libs = termios
+objs = termios_helper.o, termios_helper.h
+opts = "-p contrib"

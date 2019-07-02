@@ -16,11 +16,13 @@ import public Interfaces
 
 ||| Selects what to do for a given mode, only one option for now
 modeSelect : (mode : TerminalMode) -> Type
-modeSelect TUI = FancyConsole IO
+modeSelect TUI = FancyConsole IO;
+modeSelect Regular = ConsoleIO IO;
 
 ||| Implementation of FancyConsole for the standard POSIX IO terminal
 public export FancyConsole IO where
-  TuiStatus mode = State (modeSelect mode)
-  initialize = ?init $ (foreign FFI_C "initialize" (IO ()))
+  Status mode = State (modeSelect mode)
+  initialize {terminal} = do ?hole2 (foreign FFI_C "initialize" (IO ()) );
+                             ?hole
   cleanup = ?FancyConsole_rhs_3
   getCh = lift $ foreign FFI_C "wgetch" (IO Char)

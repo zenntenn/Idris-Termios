@@ -8,15 +8,17 @@ import CFFI
 %default total
 
 ||| The terminal mode being used
-data TerminalMode = 
+data TerminalMode =
+    ||| The previous terminal mode used
+    Regular |
     ||| The specific terminal mode being used here
     TUI
 
 interface ConsoleIO m => FancyConsole (m : Type -> Type) where    
-    TuiStatus : (mode : TerminalMode) -> Type
+    Status : (mode : TerminalMode) -> Type
     ||| Initializes the TUI mode
-    initialize : ST m Var [add (TuiStatus TUI)]
+    initialize : {terminal : Var} -> ST m Var [terminal ::: Status Regular :-> Status TUI ]
     ||| Returns the console mode to the previous state
-    cleanup : {terminal : Var} -> ST m Var [remove terminal (TuiStatus TUI)]
+    cleanup : {terminal : Var} -> ST m Var [terminal ::: Status TUI :-> Status Regular]
     ||| Gets a single char without waiting for character return
-    getCh : ST m Char [terminal ::: TuiStatus TUI]
+    getCh : ST m Char [terminal ::: Status TUI]

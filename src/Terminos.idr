@@ -3,7 +3,6 @@ module Termios
 
 import Control.ST
 import Control.ST.ImplicitCall
-import CFFI
 
 %access public export
 %default total

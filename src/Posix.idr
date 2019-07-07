@@ -27,7 +27,7 @@ modeSelect TUI = Termios Cio
 public export Termios Cio where
   Status mode = State (modeSelect mode)
   initialize = ?initialize_rhs1 (foreign FFI_C "initialize" (Cio ()))       
-  cleanup {terminal} = ?cleanup_rhs1 (foreign FFI_C "restore" (Cio ()) )                  
+  cleanup {terminal} = ?cleanup_rhs1 (foreign FFI_C "restore" (Cio ()) )              
   getCh = lift $ foreign FFI_C "wgetch" (Cio Char)
 
 -- Reference code to both check that the types are sane, and to run integration tests

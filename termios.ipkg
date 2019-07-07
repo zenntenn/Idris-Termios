@@ -1,6 +1,6 @@
 package termios
 
-modules = Termios
+modules = Termios, Termios.POSIX
 
 sourcedir = src
 

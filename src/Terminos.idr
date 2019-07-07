@@ -1,4 +1,5 @@
-module Termios.Interfaces
+||| Interface for fine grained console actions
+module Termios
 
 import Control.ST
 import Control.ST.ImplicitCall
@@ -9,16 +10,14 @@ import CFFI
 
 ||| The terminal mode being used
 data TerminalMode =
-    ||| The previous terminal mode used
-    Regular |
     ||| The specific terminal mode being used here
     TUI
 
-interface ConsoleIO m => FancyConsole (m : Type -> Type) where    
+interface (Monad m, ConsoleIO m) => Termios (m : Type -> Type) where    
     Status : (mode : TerminalMode) -> Type
     ||| Initializes the TUI mode
-    initialize : {terminal : Var} -> ST m Var [terminal ::: Status Regular :-> Status TUI ]
+    initialize : ST m Var [add (Status TUI)]
     ||| Returns the console mode to the previous state
-    cleanup : {terminal : Var} -> ST m Var [terminal ::: Status TUI :-> Status Regular]
+    cleanup : {terminal : Var} -> ST m () [remove terminal (Status TUI)] 
     ||| Gets a single char without waiting for character return
-    getCh : ST m Char [terminal ::: Status TUI]
+    getCh : {terminal : Var} -> ST m Char [terminal ::: Status TUI]
